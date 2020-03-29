@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Projects{% endblock %}
+{% block navbar_projects%}active{% endblock %}
+
+{% block content %}
+
+
+<div class="card-deck mx-auto" style="margin-top:5%;width:85%;">
+  <div class="card">
+    <img class="card-img-top" src="static/images/protein.jpeg" style="height:50%;width:100%;" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">Classification methods on a PPI network</h5>
+        <p class="card-text">The task was to perform multi-label vertex classification on a PPI network to predict labels of unseen proteins and generate a powerful embedding of the graph.</p>
+    </div>
+
+    <div class="card-footer">
+ <a href="https://github.com/pierobartolo/oracle-ml-contest" class="btn btn-secondary" style="">
+            <span class="fab fa-github mr-2"></span>Check it out on github
+          </a>    </div>
+  </div>
+
+  <div class="card">
+    <img class="card-img-top" src="static/images/progetto_api.jpg" style="height:50%;width:100%;" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">A mechanism of relationship monitoring between entities</h5>
+        <p class="card-text">The algorithm should be able to add new entities, delete an entity, add relationships between two entities, delete existing relationships. Each entity is identified by its name, and every relationship has a verse.</p>
+      </div>
+    <div class="card-footer">
+        <a href="https://github.com/pierobartolo/Data-Structures-and-Algorithms-Project" class="btn btn-secondary" style="bottom:50%;">
+            <span class="fab fa-github mr-2"></span>Check it out on github
+          </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <img class="card-img-top" src="static/images/chat.png" style="height:50%;width:100%;" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Python Group Chat</h5>
+        <p class="card-text">A Python console chat application featuring group conversations and reliability.
+        </div>
+    <div class="card-footer">
+        <a href="https://github.com/pierobartolo/COMP4621" class="btn btn-secondary " style="">
+            <span class="fab fa-github mr-2"></span>Check it out on github
+          </a>    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
