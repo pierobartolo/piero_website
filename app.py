@@ -21,11 +21,11 @@ def projects():
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.png')
+    return url_for('static', filename='favicon.png')
+
 
 if __name__ == "__main__":
-    app.run(threaded=True, port=4999)
+    app.run(threaded=True)
 
 
 
