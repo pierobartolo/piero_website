@@ -1,7 +1,7 @@
-from flask import Flask, redirect, url_for, render_template, request, session, flash
+from flask import Flask, send_from_directory, url_for, render_template, request, session, flash
 from datetime import timedelta
 from second import second
-
+import os
 app = Flask(__name__)
 app.secret_key = "hello"
 #app.permanent_session_lifetime = timedelta(days=5)
@@ -19,7 +19,10 @@ def projects():
     return render_template("projects.html")
 
 
-
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.png')
 
 if __name__ == "__main__":
     app.run(threaded=True, port=4999)
