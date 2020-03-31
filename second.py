@@ -15,8 +15,13 @@ def edit_distance():
         session['string2'] = request.form['string2']
         if session['string1'] and session['string2']:
             session['edit_dist_matrix'] = calculate_edit_distance(session['string1'], session['string2'])
-        return render_template("edit_distance.html", zip=zip, len=len,range=range)
-    return render_template("edit_distance.html", zip=zip, len=len, range=range)
+            return render_template("edit_distance.html", zip=zip, len=len, range=range)
+    else:
+        session['string1'] = "Saturday"
+        session['string2'] = "Sunday"
+        session['edit_dist_matrix'] = calculate_edit_distance(session['string1'], session['string2'])
+        return render_template("edit_distance.html", zip=zip, len=len, range=range)
+
 
 
 
