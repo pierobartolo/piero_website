@@ -4,6 +4,7 @@
 {% block content %}
 
 <div class="jumbotron">
+    <div class="container" style="margin-left:0%;">
     <h1 class="display-4">Levenshtein Distance</h1>
     <p class="lead">The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits (i.e. insertions, deletions, or substitutions) required to change one word into the other. </p>
     <hr class="my-4">
@@ -12,19 +13,21 @@
     <form method="post" action="#" class="form-inline" style="">
     <label class="sr-only" >string1<</label>
     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-      <input type="text" class="form-control" name="string1" placeholder="String1">
+      <input type="text" class="form-control" name="string1" placeholder="A string">
     </div>
 
       <label class="sr-only">string2</label>
     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-      <input type="text" class="form-control" name="string2" placeholder="String2">
+      <input type="text" class="form-control" name="string2" placeholder="Another string">
     </div>
     <button type="submit" class="btn btn-dark">Go</button>
   </form>
 
 </div>
+    </div>
 
 
+<div class="container" style="margin-left:0%;">
 <table class="table table-bordered mx-auto">
   <thead>
     <tr style="background-color: #e9ecef" >
@@ -58,8 +61,7 @@
   {% endfor %}
   </tbody>
 </table>
-
 <!-- BACKTRACKING: faf2cc -->
-
+</div>
 {% endblock %}
 

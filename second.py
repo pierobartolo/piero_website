@@ -3,22 +3,23 @@ from flask import Blueprint, render_template, request, session
 second = Blueprint("bioinformatics", __name__, template_folder="templates", static_folder="static")
 
 
-@second.route("/")
-def home():
-    return render_template("bioinfo.html")
-
-
 @second.route("/edit_distance", methods=['POST','GET'])
 def edit_distance():
     if request.method == 'POST':
-        session['string1'] = request.form['string1']
-        session['string2'] = request.form['string2']
-        if session['string1'] and session['string2']:
-            session['edit_dist_matrix'] = calculate_edit_distance(session['string1'], session['string2'])
-            return render_template("edit_distance.html", zip=zip, len=len, range=range)
+        if request.form['string1']:
+            session['string1'] = request.form['string1']
+        else:
+            session['string1'] = ""
+        if request.form['string2']:
+            session['string2'] = request.form['string2']
+        else:
+            session['string2'] = ""
+
+        session['edit_dist_matrix'] = calculate_edit_distance(session['string1'], session['string2'])
+        return render_template("edit_distance.html", zip=zip, len=len, range=range)
     else:
-        session['string1'] = "Saturday"
-        session['string2'] = "Sunday"
+        session['string1'] = "dog"
+        session['string2'] = "cat"
         session['edit_dist_matrix'] = calculate_edit_distance(session['string1'], session['string2'])
         return render_template("edit_distance.html", zip=zip, len=len, range=range)
 
