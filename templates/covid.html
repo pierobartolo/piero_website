@@ -9,9 +9,10 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container" style="margin-left:0%;">
-    <h1 class="display-4">Campania's Covid-19 Data</h1>
+    <h1 class="display-4">Covid-19 total cases in Campania</h1>
     <hr class="my-4">
-<canvas id="myChart"></canvas>
+    <div class="table-responsive">
+    <canvas id="myChart" style="height:600px" class="table"></canvas>
     </div>
 
 
@@ -20,7 +21,7 @@
     <script>
       // Global parameters:
 // do not resize the chart canvas when its container does (keep at 600x400px)
-Chart.defaults.global.responsive = true;
+Chart.defaults.global.responsive = false;
 
 // define the chart data
 var chartData = {
