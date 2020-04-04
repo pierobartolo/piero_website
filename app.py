@@ -30,7 +30,7 @@ def covid():
         icu_cases = pickle.load(data_list)
 
     times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020',datetime.now().today())]
-    return render_template('covid.html', total=total_cases,icu=icu_cases, olabels=times)
+    return render_template('covid.html', total=total_cases, icu=icu_cases, olabels=times)
 
 
 def update_data():
@@ -46,7 +46,7 @@ def update_data():
 
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(update_data, 'interval', seconds=20)
+sched.add_job(update_data, 'interval', minutes=60)
 sched.start()
 
 if __name__ == "__main__":
