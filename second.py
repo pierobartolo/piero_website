@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, session
 second = Blueprint("bioinformatics", __name__, template_folder="templates", static_folder="static")
 
 
-@second.route("/edit_distance", methods=['POST','GET'])
+@second.route("/edit_distance", methods=['POST', 'GET'])
 def edit_distance():
     if request.method == 'POST':
         if request.form['string1']:
@@ -22,8 +22,6 @@ def edit_distance():
         session['string2'] = "cat"
         session['edit_dist_matrix'] = calculate_edit_distance(session['string1'], session['string2'])
         return render_template("edit_distance.html", zip=zip, len=len, range=range)
-
-
 
 
 def calculate_edit_distance(string1, string2):
