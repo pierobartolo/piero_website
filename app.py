@@ -26,11 +26,11 @@ def projects():
 def covid():
     with open('total_cases.list', 'rb') as data_list:
         total_cases = pickle.load(data_list)
+    with open('icu_cases.list', 'rb') as data_list:
+        icu_cases = pickle.load(data_list)
 
-    legend = 'Total Cases'
-    temperatures = total_cases
-    times = [d.strftime('%d-%m-%Y') for d in pd.date_range('24/02/2020',datetime.now().today())]
-    return render_template('covid.html', values=temperatures, labels=times, legend=legend)
+    times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020',datetime.now().today())]
+    return render_template('covid.html', total=total_cases,icu=icu_cases, olabels=times)
 
 
 def update_data():
@@ -38,16 +38,19 @@ def update_data():
     regional_data = pd.read_json(url)
     campania_data = regional_data.loc[regional_data["codice_regione"] == 15]
     total_cases = campania_data["totale_casi"].values
+    icu_cases = campania_data["terapia_intensiva"].values
     with open('total_cases.list', 'wb') as data_list:
         pickle.dump(total_cases, data_list)
+    with open('icu_cases.list', 'wb') as data_list:
+        pickle.dump(icu_cases, data_list)
 
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(update_data, 'interval', minutes=60)
+sched.add_job(update_data, 'interval', seconds=20)
 sched.start()
 
 if __name__ == "__main__":
-    app.run(threaded=True, debug=True, port=4999)
+    app.run(threaded=True)
 
 
 

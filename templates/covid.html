@@ -9,27 +9,30 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container" style="margin-left:0%;">
-    <h1 class="display-4">Total cases in Campania</h1>
+    <h1 class="display-4">Campania Statistics</h1>
     <hr class="my-4">
     <div class="table-responsive">
-    <canvas id="myChart" style="height:480px" class="table"></canvas>
+    <canvas id="myChart" style="height:480px;" class="table"></canvas>
+    </div>
+        <div class="table-responsive">
+    <canvas id="myChartICU" style="height:480px;" class="table"></canvas>
     </div>
 
 
     <!-- bar chart canvas element -->
 
     <script>
-      // Global parameters:
+     // Global parameters:
 // do not resize the chart canvas when its container does (keep at 600x400px)
 Chart.defaults.global.responsive = false;
 
 // define the chart data
 var chartData = {
-  labels : [{% for item in labels %}
+  labels : [{% for item in olabels %}
              "{{item}}",
             {% endfor %}],
   datasets : [{
-      label: '{{ legend }}',
+      label: 'Total Cases',
       fill: true,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -47,12 +50,13 @@ var chartData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data : [{% for item in values %}
+      data : [{% for item in total %}
                 {{item}},
               {% endfor %}],
       spanGaps: false
   }]
 }
+
 
 // get chart canvas
 var ctx = document.getElementById("myChart").getContext("2d");
@@ -62,6 +66,58 @@ var myChart = new Chart(ctx, {
   type: 'line',
   data: chartData,
 });
+
+
+    </script>
+
+
+        <script>
+     // Global parameters:
+// do not resize the chart canvas when its container does (keep at 600x400px)
+Chart.defaults.global.responsive = false;
+
+// define the chart data
+var chartDataICU = {
+  labels : [{% for item in olabels %}
+             "{{item}}",
+            {% endfor %}],
+  datasets : [{
+      label: 'Total ICU Occupancy',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: "rgba(75,192,192,0.4)",
+      borderColor: "rgba(75,192,192,1)",
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "rgba(75,192,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data : [{% for item in icu %}
+                {{item}},
+              {% endfor %}],
+      spanGaps: false
+  }]
+}
+
+
+// get chart canvas
+var ctxICU = document.getElementById("myChartICU").getContext("2d");
+
+// create the chart using the chart canvas
+var myChart = new Chart(ctxICU, {
+  type: 'line',
+  data: chartDataICU,
+});
+
+
     </script>
 
 {% endblock %}
