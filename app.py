@@ -1,4 +1,4 @@
-from flask import Flask, render_template,session
+from flask import Flask, render_template
 from second import second
 from apscheduler.schedulers.background import BackgroundScheduler
 import pandas as pd
@@ -8,7 +8,6 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = "hardkey"
 app.register_blueprint(second, url_prefix="/bioinformatics")
-
 
 
 @app.route("/")
@@ -46,7 +45,7 @@ def update_data():
 
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(update_data, 'interval', minutes=60)
+sched.add_job(update_data, 'cron', hour=12, minute=50)
 sched.start()
 
 if __name__ == "__main__":
