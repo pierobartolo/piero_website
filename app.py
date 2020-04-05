@@ -3,7 +3,7 @@ from second import second
 from apscheduler.schedulers.background import BackgroundScheduler
 import pandas as pd
 import pickle
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.secret_key = "hardkey"
@@ -27,9 +27,15 @@ def covid():
         total_cases = pickle.load(data_list)
     with open('icu_cases.list', 'rb') as data_list:
         icu_cases = pickle.load(data_list)
+    with open('tests.list', 'rb') as data_list:
+        tests = pickle.load(data_list)
 
-    times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
-    return render_template('covid.html', total=total_cases, icu=icu_cases, olabels=times)
+    if datetime.now().hour >= 16 and datetime.now().minute >= 35:
+        times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
+    else:
+        times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today()-timedelta(1))]
+
+    return render_template('covid.html', total=total_cases, icu=icu_cases, tests=tests, olabels=times)
 
 
 def update_data():
@@ -38,15 +44,17 @@ def update_data():
     campania_data = regional_data.loc[regional_data["codice_regione"] == 15]
     total_cases = campania_data["totale_casi"].values
     icu_cases = campania_data["terapia_intensiva"].values
-    tests = campania_data["tamponi"].values
+    tests = campania_data["tamponi"].diff().fillna(10).values
     with open('total_cases.list', 'wb') as data_list:
         pickle.dump(total_cases, data_list)
     with open('icu_cases.list', 'wb') as data_list:
         pickle.dump(icu_cases, data_list)
+    with open('tests.list', 'wb') as data_list:
+        pickle.dump(tests, data_list)
 
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(update_data, 'cron', hour=11, minute=11)  # TIMEZONE
+sched.add_job(update_data, 'cron', hour=16, minute=35)  # TIMEZONE
 sched.start()
 
 if __name__ == "__main__":
