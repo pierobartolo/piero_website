@@ -46,7 +46,7 @@ def update_data():
 
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(update_data, 'cron', hour=11, minute=3)
+sched.add_job(update_data, 'cron', hour=11, minute=4)
 sched.start()
 
 if __name__ == "__main__":
