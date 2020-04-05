@@ -34,6 +34,7 @@ var chartData = {
             {% endfor %}],
   datasets : [{
       label: 'Total Cases',
+      type: 'line',
       fill: true,
       lineTension: 0.1,
       backgroundColor: "rgba(75,192,192,0.4)",
@@ -55,8 +56,8 @@ var chartData = {
                 {{item}},
               {% endfor %}],
       spanGaps: false
-  }]
-}
+  }],
+  }
 
 
 // get chart canvas
@@ -64,7 +65,7 @@ var ctx = document.getElementById("myChart").getContext("2d");
 
 // create the chart using the chart canvas
 var myChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: chartData,
 });
 
@@ -97,7 +98,9 @@ var chartDataICU = {
                 {{item}},
               {% endfor %}],
       spanGaps: false
-  }]
+  }
+
+  ]
 }
 
 
@@ -139,7 +142,32 @@ var chartDataTests = {
                 {{item}},
               {% endfor %}],
       spanGaps: false
-  }]
+  },{
+      label: 'Daily new cases',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: "#3e3e3e",
+      borderColor: "#3e3e3e",
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "#3e3e3e",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "#3e3e3e",
+      pointHoverBorderColor: "#3e3e3e",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data : [{% for item in new %}
+                {{item}},
+              {% endfor %}],
+      spanGaps: false
+  },
+
+  ]
 }
 
 

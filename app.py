@@ -4,6 +4,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import pandas as pd
 import pickle
 from datetime import datetime, timedelta
+from math import ceil
 
 app = Flask(__name__)
 app.secret_key = "hardkey"
@@ -29,13 +30,15 @@ def covid():
         icu_cases = pickle.load(data_list)
     with open('tests.list', 'rb') as data_list:
         tests = pickle.load(data_list)
+    with open('new_cases.list', 'rb') as data_list:
+        new_cases = pickle.load(data_list)
 
     if datetime.now().hour >= 16 and datetime.now().minute >= 35:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
     else:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today()-timedelta(1))]
 
-    return render_template('covid.html', total=total_cases, icu=icu_cases, tests=tests, olabels=times)
+    return render_template('covid.html', total=total_cases, new=new_cases, icu=icu_cases, tests=tests, olabels=times)
 
 
 def update_data():
@@ -45,16 +48,20 @@ def update_data():
     total_cases = campania_data["totale_casi"].values
     icu_cases = campania_data["terapia_intensiva"].values
     tests = campania_data["tamponi"].diff().fillna(10).values
+    new_cases = campania_data["nuovi_positivi"].values
     with open('total_cases.list', 'wb') as data_list:
         pickle.dump(total_cases, data_list)
     with open('icu_cases.list', 'wb') as data_list:
         pickle.dump(icu_cases, data_list)
     with open('tests.list', 'wb') as data_list:
         pickle.dump(tests, data_list)
+    with open('new_cases.list', 'wb') as data_list:
+        pickle.dump(new_cases, data_list)
 
 
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(update_data, 'cron', hour=16, minute=35)  # TIMEZONE
+
 sched.start()
 
 if __name__ == "__main__":
