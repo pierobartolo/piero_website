@@ -28,16 +28,17 @@ def covid():
     with open('icu_cases.list', 'rb') as data_list:
         icu_cases = pickle.load(data_list)
 
-    times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020',datetime.now().today())]
+    times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
     return render_template('covid.html', total=total_cases, icu=icu_cases, olabels=times)
 
 
 def update_data():
-    url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json"
+    url = "https://w.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json"
     regional_data = pd.read_json(url)
     campania_data = regional_data.loc[regional_data["codice_regione"] == 15]
     total_cases = campania_data["totale_casi"].values
     icu_cases = campania_data["terapia_intensiva"].values
+    tests = campania_data["tamponi"].values
     with open('total_cases.list', 'wb') as data_list:
         pickle.dump(total_cases, data_list)
     with open('icu_cases.list', 'wb') as data_list:
@@ -45,7 +46,7 @@ def update_data():
 
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(update_data, 'cron', hour=10, minute=56)
+sched.add_job(update_data, 'cron', hour=11, minute=3)
 sched.start()
 
 if __name__ == "__main__":
