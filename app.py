@@ -22,14 +22,11 @@ csp = {
         'www.google-analytics.com',
         'cdnjs.cloudflare.com'
     ],
-    'img-src':[
+    'img-src': [
         '\'self\' data:',
         'www.googletagmanager.com',
         'www.google-analytics.com'
                 ],
-    'media-src': [
-            '*',
-        ],
     'script-src-elem': [
         '\'self\'',
         '\'unsafe-inline\'',
