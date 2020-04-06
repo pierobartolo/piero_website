@@ -1,10 +1,11 @@
 from flask import Flask, render_template, make_response
 from second import second
 from apscheduler.schedulers.background import BackgroundScheduler
-import pandas as pd
-import pickle
 from datetime import datetime, timedelta
 from flask_talisman import Talisman
+from utilities import covid19
+import pickle
+import pandas as pd
 
 csp = {
     'default-src': [
@@ -48,7 +49,7 @@ csp = {
 }
 
 app = Flask(__name__)
-talisman = Talisman(app, content_security_policy=csp)
+#talisman = Talisman(app, content_security_policy=csp)
 app.secret_key = "hardkey"
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
@@ -83,30 +84,12 @@ def covid():
     return render_template('covid.html', total=total_cases, new=new_cases, icu=icu_cases, tests=tests, olabels=times)
 
 
-def update_data():
-    url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json"
-    regional_data = pd.read_json(url)
-    campania_data = regional_data.loc[regional_data["codice_regione"] == 15]
-    total_cases = campania_data["totale_casi"].values
-    icu_cases = campania_data["terapia_intensiva"].values
-    tests = campania_data["tamponi"].diff().fillna(10).values
-    new_cases = campania_data["nuovi_positivi"].values
-    with open('total_cases.list', 'wb') as data_list:
-        pickle.dump(total_cases, data_list)
-    with open('icu_cases.list', 'wb') as data_list:
-        pickle.dump(icu_cases, data_list)
-    with open('tests.list', 'wb') as data_list:
-        pickle.dump(tests, data_list)
-    with open('new_cases.list', 'wb') as data_list:
-        pickle.dump(new_cases, data_list)
-
-
 scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(update_data, 'cron', hour=16, minute=35)  # Updating COVID Data
+scheduler.add_job(covid19.update_data, 'cron', hour=16, minute=35)  # Updating COVID Data
 scheduler.start()
 
 if __name__ == "__main__":
-    app.run(threaded=True)
+    app.run(threaded=True,debug =True)
 
 
 
