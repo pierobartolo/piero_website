@@ -46,7 +46,7 @@ def covid():
 
 
 scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(covid19.update_data, 'cron', hour=16, minute=35)  # Updating COVID Data
+scheduler.add_job(covid19.update_data, 'cron', hour=22, minute=53)  # Updating COVID Data 16 35
 scheduler.start()
 
 if __name__ == "__main__":
