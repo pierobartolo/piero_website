@@ -15,7 +15,6 @@ csp = {
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net',
-        'use.fontawesome.com',
         'googletagmanager.com'
     ],
     'img-src': '\'self\' data:',
@@ -29,6 +28,9 @@ csp = {
         'code.jquery.com',
         'cdn.jsdelivr.net'
     ]
+    'style-src-elem':[
+        '\'self\'',
+        'use.fontawesome.com']
 }
 
 app = Flask(__name__)
