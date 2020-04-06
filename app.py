@@ -23,11 +23,11 @@ csp = {
         ],
     'script-src-elem': [
         '\'self\'',
-        '\'unsafe-inline\''
+        '\'unsafe-inline\'',
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net'
-    ]
+    ],
     'style-src-elem':[
         '\'self\'',
         'use.fontawesome.com']
