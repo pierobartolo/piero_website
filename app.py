@@ -6,8 +6,18 @@ import pickle
 from datetime import datetime, timedelta
 from flask_talisman import Talisman
 
+csp = {
+    'default-src': [
+        '\'self\'',
+        '\'unsafe-inline\'',
+        'stackpath.bootstrapcdn.com',
+        'code.jquery.com',
+        'cdn.jsdelivr.net'
+    ]
+}
+
 app = Flask(__name__)
-Talisman(app)
+talisman = Talisman(app, content_security_policy=csp)
 app.secret_key = "hardkey"
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
