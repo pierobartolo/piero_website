@@ -9,7 +9,7 @@ from flask_talisman import Talisman
 csp = {
     'default-src': [
         '\'self\'',
-        'unsafe-inline'
+        '\'unsafe-inline\''
     ],
     'script-src': [
         'stackpath.bootstrapcdn.com',
