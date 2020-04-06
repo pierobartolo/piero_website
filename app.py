@@ -8,7 +8,8 @@ from flask_talisman import Talisman
 
 csp = {
     'default-src': [
-        '\'self\''
+        '\'self\'',
+        'unsafe-inline'
     ],
     'script-src': [
         'stackpath.bootstrapcdn.com',
@@ -20,7 +21,8 @@ csp = {
     'img-src': '\'self\' data:',
     'media-src': [
             '*',
-        ]
+        ],
+    'script-src-elem': '\'self\''
 }
 
 app = Flask(__name__)
