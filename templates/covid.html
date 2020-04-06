@@ -10,25 +10,21 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container left">
-        <h1 class="display-4">Covid-19 in Campania</h1>
-        <hr class="my-4">
-        <div class="table-responsive">
-            <canvas style="height:480px;" id="Total"></canvas>
-        </div>
-        <div class="table-responsive">
-            <canvas id="Tests" style="height:480px;"  class="table"></canvas>
-        </div>
-        <div class="table-responsive">
-            <canvas id="ICU"  style="height:480px;" class="table"></canvas>
-        </div>
+    <h1 class="display-4">Covid-19 in Campania</h1>
+    <hr class="my-4">
+    <div class="table-responsive">
+    <canvas id="myChart" style="height:480px;" class="table"></canvas>
     </div>
-</div>
+    <div class="table-responsive">
+    <canvas id="myChartTests" style="height:480px;" class="table"></canvas>
+    </div>
+    <div class="table-responsive">
+    <canvas id="myChartICU" style="height:480px;" class="table"></canvas>
+    </div>
 
 
-
-<script>
-
-    // Global parameters:
+        <script>
+     // Global parameters:
 // do not resize the chart canvas when its container does (keep at 600x400px)
 Chart.defaults.global.responsive = false;
 
@@ -66,7 +62,7 @@ var chartData = {
 
 
 // get chart canvas
-var ctx = document.getElementById("Total").getContext("2d");
+var ctx = document.getElementById("myChart").getContext("2d");
 
 // create the chart using the chart canvas
 var myChart = new Chart(ctx, {
@@ -110,7 +106,7 @@ var chartDataICU = {
 
 
 // get chart canvas
-var ctxICU = document.getElementById("ICU").getContext("2d");
+var ctxICU = document.getElementById("myChartICU").getContext("2d");
 
 // create the chart using the chart canvas
 var myChart = new Chart(ctxICU, {
@@ -177,14 +173,15 @@ var chartDataTests = {
 
 
 // get chart canvas
-var ctx = document.getElementById("Tests").getContext("2d");
+var ctx = document.getElementById("myChartTests").getContext("2d");
 
 // create the chart using the chart canvas
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: chartDataTests,
 });
-</script>
+
+ </script>
 
 
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/website.css') }}">
