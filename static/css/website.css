@@ -1,0 +1,19 @@
+    div.container.left{
+        margin-left:0%;
+    }
+
+
+    img.img-thumbnail.img-responsive.prof_pic{
+        float:left;
+        margin-right:4%;
+        width:50%;height:40%;
+        max-height:300px;
+        max-width:250px;
+    }
+
+    p.lead{
+        text-align:justify
+    }
+    a.link{
+        color:#212529;
+    }
