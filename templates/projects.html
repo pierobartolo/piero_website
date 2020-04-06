@@ -28,7 +28,7 @@
         <p class="card-text">The algorithm should be able to add new entities, delete entities, add relationships between two entities and delete existing relationships. </p>
       </div>
     <div class="card-footer">
-        <a href="https://github.com/pierobartolo/Data-Structures-and-Algorithms-Project" class="btn btn-dark" style="bottom:50%;">
+        <a href="https://github.com/pierobartolo/Data-Structures-and-Algorithms-Project" class="btn btn-dark bottom" >
             <span class="fab fa-github mr-2"></span>Check it out on github
           </a>
     </div>
@@ -48,17 +48,7 @@
 </div>
 
 
-<style>
-    div.card-deck.mx-auto.top{
-        margin-top:5%;width:85%;
-    }
-    p{
-        text-align:justify;
-    }
-    img.card-img.top{
-        height:50%;
-        width:100%;
-    }
-</style>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/website.css') }}">
+
 
 {% endblock %}

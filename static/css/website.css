@@ -17,3 +17,18 @@
     a.link{
         color:#212529;
     }
+
+    div.card-deck.mx-auto.top{
+        margin-top:5%;width:85%;
+    }
+
+    img.card-img.top{
+        height:50%;
+        width:100%;
+    }
+
+    a.btn.btn-dark.bottom{
+        bottom:50%;
+    }
+
+
