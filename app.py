@@ -12,6 +12,7 @@ csp = {
         '\'unsafe-inline\''
     ],
     'script-src': [
+        '\'self\'',
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net',
