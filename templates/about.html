@@ -1,54 +1,65 @@
 {% extends "base.html" %}
+{% block meta_description%}<meta name="description" content="Musings of a Computer Scientist.">{% endblock %}
 {% block title %}About{% endblock %}
 {% block navbar_about%}active{% endblock %}
 
 {% block content %}
 <div class="jumbotron">
-    <div class="container" style="margin-left:0%;">
-  <h1 class="display-5" align="left">Piersilvio De Bartolomeis</h1>
-  <p class="lead">Improbable things happen a lot.</p>
-  <hr class="my-4">
-  <div class="span4">
-      <img class="img-thumbnail img-responsive" style="float:left;margin-right:4%;width:50%;height:40%;max-height:300px;max-width:250px;" src="/static/images/prof_pic.jpg" />
-      <p class="lead" style="text-align:justify;">I am a third-year BEng student in Computer Engineering at <em>Polytechnic of Milan</em> with a profound interest in mathematics.</p>
-
-      <p class="lead" style="text-align:justify;">
-        <em><q>One of the great joys of mathematics is the incontrovertible feeling that you've understood something the right way, all the way down to the bottom; it's a feeling I haven't experienced in any other sphere of mental life.</q><br></em> </p>
-
-      <p class="lead" style="text-align:justify;">
-        I am particularly interested in applications of Data Science and Machine Learning in pharma and medicine such as disease identification, personalized treatment and drug discovery.
-
-      </p>
-
-      <p class="lead" style="text-align:justify;">
-        Moreover, the idea of AI becoming a tertiary layer to the human brain really fascinates me; I believe they are doing an amazing work at <a style="color:#212529;" href="https://www.neuralink.com/">Neuralink!</a>
-
-
-      </p>
-
-    <p class="lead" style="text-align:justify;">
-      I am also the co-founder of <a style="color:#212529;" href="https://www.instagram.com/filtridicoscienza/"> Filtri Di Coscienza </a>, here you can find our first <a style="color:#212529;" href="https://www.poliniani.com/product-page/tutto-d-un-fiato">comic book</a>.
-    </p>
-
+    <div class="container left" id="cont">
+        <h1 class="display-5" align="left">Piersilvio De Bartolomeis</h1>
+        <p class="lead">Improbable things happen a lot.</p>
         <hr class="my-4">
-        <a href="https://github.com/pierobartolo" class="btn btn-outline-dark">
-        <span class="fab fa-github mr-2"></span>Github</a>
+        <div class="span4">
+          <img class="img-thumbnail img-responsive prof_pic"  src="{{ url_for('static', filename='images/prof_pic.jpg') }}" />
+          <p class="lead">I am a third-year BEng student in Computer Engineering at <em>Polytechnic of Milan</em> with a profound interest in mathematics.</p>
+          <p class="lead" >
+            <em><q>One of the great joys of mathematics is the incontrovertible feeling that you've understood something the right way, all the way down to the bottom; it's a feeling I haven't experienced in any other sphere of mental life.</q><br></em> </p>
+          <p class="lead">
+            I am particularly interested in applications of Data Science and Machine Learning in pharma and medicine such as disease identification, personalized treatment and drug discovery.
+          </p>
+          <p class="lead">
+            Moreover, the idea of AI becoming a tertiary layer to the human brain really fascinates me; I believe they are doing an amazing work at <a style="color:#212529;" href="https://www.neuralink.com/">Neuralink!</a>
+          </p>
+          <p class="lead justify" >
+            I am also the co-founder of <a class="link" href="https://www.instagram.com/filtridicoscienza/"> Filtri Di Coscienza </a>, here you can find our first <a style="color:#212529;" href="https://www.poliniani.com/product-page/tutto-d-un-fiato">comic book</a>.
+          </p>
+          <hr class="my-4">
+          <a href="https://github.com/pierobartolo" class="btn btn-outline-dark">
+            <span class="fab fa-github mr-2"></span>
+              Github
+          </a>
+          <a href="https://twitter.com/DePiersilvio" class="btn btn-outline-dark">
+            <span class="fab fa-twitter mr-2"></span>
+              Twitter
+          </a>
 
-        <a href="https://twitter.com/DePiersilvio" class="btn btn-outline-dark">
-          <span class="fab fa-twitter mr-2"></span>
-          Twitter</a>
-
-
-
-
+        </div>
+    </div>
 </div>
-  </div>
+
+<style>
+
+    div.container.left{
+        margin-left:0%;
+    }
 
 
-</div>
+    img.img-thumbnail.img-responsive.prof_pic{
+        float:left;
+        margin-right:4%;
+        width:50%;height:40%;
+        max-height:300px;
+        max-width:250px;
+    }
 
+    p.lead{
+        text-align:justify
+    }
+    a.link{
+        color:#212529;
+    }
 
-
+</style>
 
 {% endblock %}
 

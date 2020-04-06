@@ -1,67 +1,85 @@
 {% extends "base.html" %}
-{% block title %}Bioinformatics{% endblock %}
+{% block meta_description%}<meta name="description" content="A  Levenshtein Distance Demo.">{% endblock %}
+{% block title %}Bioinformatics | Levenshtein Distance{% endblock %}
 {% block navbar_bioinfo%}active{% endblock %}
 {% block content %}
 
 <div class="jumbotron">
-    <div class="container" style="margin-left:0%;">
-    <h1 class="display-4">Levenshtein Distance</h1>
-    <p class="lead" style="text-align:justify;">The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits (i.e. insertions, deletions, or substitutions) required to change one word into the other. </p>
-    <hr class="my-4">
+    <div class="container left">
+        <h1 class="display-4">Levenshtein Distance</h1>
+        <p class="lead">The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits (i.e. insertions, deletions, or substitutions) required to change one word into the other. </p>
+        <hr class="my-4">
 
+        <form method="post" action="#" class="form-inline">
 
-    <form method="post" action="#" class="form-inline" style="">
-    <label class="sr-only" >string1<</label>
-    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-      <input type="text" class="form-control" name="string1" placeholder="A string">
+            <label class="sr-only" >string1<</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <input type="text" class="form-control" name="string1" placeholder="A string">
+            </div>
+
+            <label class="sr-only">string2</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+              <input type="text" class="form-control" name="string2" placeholder="Another string">
+            </div>
+
+            <button type="submit" class="btn btn-dark">Go</button>
+        </form>
     </div>
+</div>
 
-      <label class="sr-only">string2</label>
-    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-      <input type="text" class="form-control" name="string2" placeholder="Another string">
-    </div>
-    <button type="submit" class="btn btn-dark">Go</button>
-  </form>
+
+<div class="container left">
+    <table class="table table-bordered mx-auto">
+        <thead>
+            <tr class="border">
+              <th scope="col"> </th>
+              <th scope="col">-</th>
+              {% for char in session['string1']: %}
+              <th scope="col"><b>{{char}}</b></th>
+              {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in range(len(session['edit_dist_matrix'])) %}
+            <tr>
+                {% if i-1>=0 %}
+                <th  class="border" scope="row">{{session['string2'][i-1]}}</th>
+                {% else %}
+                      <th class="border" scope="row">-</th>
+                {% endif %}
+
+                {% for j in range(len(session['edit_dist_matrix'][0])) %}
+                  {% if i == len(session['edit_dist_matrix'])-1 and j == len(session['edit_dist_matrix'][0])-1  %}
+                    <td class="result">{{session['edit_dist_matrix'][i][j]}}</td>
+                  {% else %}
+                    <td>{{session['edit_dist_matrix'][i][j] }}</td>
+                  {% endif %}
+                {% endfor %}
+              </tr>
+            {% endfor %}
+      </tbody>
+    </table>
 
 </div>
-    </div>
 
+<style>
+    div.container.left{
+        margin-left:0%;
+    }
 
-<div class="container" style="margin-left:0%;">
-<table class="table table-bordered mx-auto">
-  <thead>
-    <tr style="background-color: #e9ecef" >
-      <th scope="col"> </th>
-      <th scope="col">-</th>
-      {% for char in session['string1']: %}
-      <th scope="col"><b>{{char}}</b></th>
-      {% endfor %}
-    </tr>
-  </thead>
-    <tbody>
-
-
-  {% for i in range(len(session['edit_dist_matrix'])) %}
-      <tr>
-        {% if i-1>=0 %}
-      <th style="background-color: #e9ecef" scope="row">{{session['string2'][i-1]}}</th>
-        {% else %}
-              <th style="background-color: #e9ecef" scope="row">-</th>
-        {% endif %}
-
-      {% for j in range(len(session['edit_dist_matrix'][0])) %}
-          {% if i == len(session['edit_dist_matrix'])-1 and j == len(session['edit_dist_matrix'][0])-1  %}
-                      <td style="  background-color: #dff0d8">{{session['edit_dist_matrix'][i][j]}}</td>
-          {% else %}
-          <td>{{session['edit_dist_matrix'][i][j] }}</td>
-          {% endif %}
-
-      {% endfor %}
-      </tr>
-  {% endfor %}
-  </tbody>
-</table>
-<!-- BACKTRACKING: faf2cc -->
-</div>
+    p.lead{
+        text-align:justify;
+    }
+    tr.border{
+        background-color: #e9ecef;
+    }
+    th.border{
+        background-color: #e9ecef;
+    }
+    td.result{
+        background-color: #dff0d8
+    }
+</style>
 {% endblock %}
 

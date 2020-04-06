@@ -9,7 +9,6 @@ from flask_talisman import Talisman
 csp = {
     'default-src': [
         '\'self\'',
-        '\'unsafe-inline\'',
         'www.google-analytics.com'
     ],
     'script-src': [
@@ -40,8 +39,7 @@ csp = {
     ],
     'style-src': [
         'use.fontawesome.com',
-        '\'self\'',
-        '\'unsafe-inline\''],
+        '\'self\''],
     'style-src-elem': [
         '\'self\'',
         'use.fontawesome.com'],
@@ -101,28 +99,6 @@ def update_data():
         pickle.dump(tests, data_list)
     with open('new_cases.list', 'wb') as data_list:
         pickle.dump(new_cases, data_list)
-
-
-@app.route('/sitemap.xml', methods=['GET'])
-def sitemap():
-    try:
-        """Generate sitemap.xml. Makes a list of urls and date modified."""
-        pages = []
-        ten_days_ago = (datetime.now() - timedelta(days=7)).date().isoformat()
-        # static pages
-        for rule in app.url_map.iter_rules():
-            if "GET" in rule.methods and len(rule.arguments) == 0:
-                pages.append(
-                    ["https://piersilviodebartolomeis.com" + str(rule.rule), ten_days_ago]
-                )
-
-        sitemap_xml = render_template('sitemap_template.xml', pages=pages)
-        response = make_response(sitemap_xml)
-        response.headers["Content-Type"] = "application/xml"
-
-        return response
-    except Exception as e:
-        return str(e)
 
 
 scheduler = BackgroundScheduler(daemon=True)
