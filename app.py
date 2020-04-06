@@ -14,7 +14,8 @@ csp = {
     'script-src': [
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
-        'cdn.jsdelivr.net'
+        'cdn.jsdelivr.net',
+        'googletagmanager.com'
     ],
     'img-src': '\'self\' data:',
     'media-src': [
