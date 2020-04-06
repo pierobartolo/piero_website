@@ -30,7 +30,7 @@ csp = {
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net',
-        'cdnjs.cloudflare.com',
+        'https://cdnjs.cloudflare.com',
         'www.googletagmanager.com',
         'www.google-analytics.com',
 
