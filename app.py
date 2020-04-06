@@ -9,7 +9,8 @@ from flask_talisman import Talisman
 csp = {
     'default-src': [
         '\'self\'',
-        '\'unsafe-inline\''
+        '\'unsafe-inline\'',
+        'www.google-analytics.com'
     ],
     'script-src': [
         '\'self\'',
@@ -37,6 +38,7 @@ csp = {
         'www.google-analytics.com',
 
     ],
+    'style-src': 'use.fontawesome.com',
     'style-src-elem':[
         '\'self\'',
         'use.fontawesome.com'],
