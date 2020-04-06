@@ -18,11 +18,11 @@ csp = {
         'use.fontawesome.com',
         'googletagmanager.com'
     ],
-    'img-src': '\'self\' data:',
-    'media-src': [
-            '*',
-        ],
-    'script-src-elem': '\'self\''
+    'img-src': '*',
+    'script-src-elem': ['\'self\'',
+        'stackpath.bootstrapcdn.com',
+        'code.jquery.com',
+        'cdn.jsdelivr.net']
 }
 
 app = Flask(__name__)
