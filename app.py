@@ -31,7 +31,8 @@ csp = {
         'cdn.jsdelivr.net',
         'cdnjs.cloudflare.com',
         'www.googletagmanager.com',
-        'www.google-analytics.com'
+        'www.google-analytics.com',
+        'www.cdnjs.cloudflare.com'
 
     ],
     'style-src-elem':[
