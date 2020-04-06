@@ -49,7 +49,7 @@ csp = {
 }
 
 app = Flask(__name__)
-#talisman = Talisman(app, content_security_policy=csp)
+talisman = Talisman(app, content_security_policy=csp)
 app.secret_key = "hardkey"
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
