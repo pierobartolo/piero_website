@@ -8,48 +8,9 @@ import pickle
 import pandas as pd
 from config import Config
 
-csp = {
-    'default-src': [
-        '\'self\'',
-        'www.google-analytics.com'
-    ],
-    'script-src': [
-        '\'self\'',
-        '\'unsafe-inline\'',
-        'stackpath.bootstrapcdn.com',
-        'code.jquery.com',
-        'cdn.jsdelivr.net',
-        'www.googletagmanager.com',
-        'www.google-analytics.com',
-        'cdnjs.cloudflare.com'
-    ],
-    'img-src': [
-        '\'self\' data:',
-        'www.googletagmanager.com',
-        'www.google-analytics.com'
-                ],
-    'script-src-elem': [
-        '\'self\'',
-        'stackpath.bootstrapcdn.com',
-        'code.jquery.com',
-        'cdn.jsdelivr.net',
-        'https://cdnjs.cloudflare.com',
-        'www.googletagmanager.com',
-        'www.google-analytics.com',
-
-    ],
-    'style-src': [
-        'use.fontawesome.com',
-        '\'self\''],
-    'style-src-elem': [
-        '\'self\'',
-        'use.fontawesome.com'],
-    'font-src': '*'
-
-}
 
 app = Flask(__name__)
-talisman = Talisman(app, content_security_policy=csp, content_security_policy_nonce_in=['script-src-elem'])
+talisman = Talisman(app, content_security_policy=Config.csp, content_security_policy_nonce_in=['script-src-elem'])
 app.config.from_object(Config)
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
