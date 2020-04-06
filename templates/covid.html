@@ -13,13 +13,13 @@
         <h1 class="display-4">Covid-19 in Campania</h1>
         <hr class="my-4">
         <div class="table-responsive">
-            <canvas class="table" style=""id="Total"></canvas>
+            <canvas style="height:480px;" id="Total"></canvas>
         </div>
         <div class="table-responsive">
-            <canvas id="Tests"  class="table"></canvas>
+            <canvas id="Tests" style="height:480px;"  class="table"></canvas>
         </div>
         <div class="table-responsive">
-            <canvas id="ICU"  class="table"></canvas>
+            <canvas id="ICU"  style="height:480px;" class="table"></canvas>
         </div>
     </div>
 </div>
@@ -30,7 +30,7 @@
 
     // Global parameters:
 // do not resize the chart canvas when its container does (keep at 600x400px)
-Chart.defaults.global.responsive = true;
+Chart.defaults.global.responsive = false;
 
 // define the chart data
 var chartData = {
