@@ -18,7 +18,8 @@ csp = {
         'googletagmanager.com',
         'google-analytics.com'
     ],
-    'img-src': '\'self\' data:',
+    'img-src':[ '\'self\' data:',
+                'www.googletagmanager.com'],
     'media-src': [
             '*',
         ],
