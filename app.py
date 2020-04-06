@@ -4,9 +4,10 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import pandas as pd
 import pickle
 from datetime import datetime, timedelta
-from math import ceil
+from flask_talisman import Talisman
 
 app = Flask(__name__)
+Talisman(app)
 app.secret_key = "hardkey"
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
