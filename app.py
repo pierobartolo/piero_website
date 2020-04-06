@@ -30,8 +30,7 @@ csp = {
         'code.jquery.com',
         'cdn.jsdelivr.net',
         'cdnjs.cloudflare.com',
-        'googletagmanager.com',
-        '*.google-analytics.com'
+        'www.googletagmanager.com',
 
     ],
     'style-src-elem':[
