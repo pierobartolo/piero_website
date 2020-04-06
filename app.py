@@ -10,7 +10,7 @@ from config import Config
 
 
 app = Flask(__name__)
-talisman = Talisman(app, content_security_policy=Config.csp, content_security_policy_nonce_in=['script-src-elem'])
+talisman = Talisman(app, content_security_policy=Config.csp, content_security_policy_nonce_in=['script-src-elem', 'script-src'])
 app.config.from_object(Config)
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
