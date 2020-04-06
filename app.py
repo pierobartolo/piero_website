@@ -29,7 +29,6 @@ csp = {
                 ],
     'script-src-elem': [
         '\'self\'',
-        '\'unsafe-inline\'',
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net',
@@ -50,7 +49,7 @@ csp = {
 
 app = Flask(__name__)
 talisman = Talisman(app, content_security_policy=csp)
-app.secret_key = "hardkey"
+app.secret_key = "gkDlU9Fap07N_tHeV8iMKQ"
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
 
@@ -89,7 +88,7 @@ scheduler.add_job(covid19.update_data, 'cron', hour=16, minute=35)  # Updating C
 scheduler.start()
 
 if __name__ == "__main__":
-    app.run(threaded=True,debug =True)
+    app.run(threaded=True)
 
 
 
