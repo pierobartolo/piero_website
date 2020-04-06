@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, make_response
 from second import second
 from apscheduler.schedulers.background import BackgroundScheduler
 import pandas as pd
@@ -38,11 +38,11 @@ csp = {
         'www.google-analytics.com',
 
     ],
-    'style-src':[
+    'style-src': [
         'use.fontawesome.com',
         '\'self\'',
         '\'unsafe-inline\''],
-    'style-src-elem':[
+    'style-src-elem': [
         '\'self\'',
         'use.fontawesome.com'],
     'font-src': '*'
@@ -103,10 +103,31 @@ def update_data():
         pickle.dump(new_cases, data_list)
 
 
-sched = BackgroundScheduler(daemon=True)
-sched.add_job(update_data, 'cron', hour=16, minute=35)  # TIMEZONE
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    try:
+        """Generate sitemap.xml. Makes a list of urls and date modified."""
+        pages = []
+        ten_days_ago = (datetime.now() - timedelta(days=7)).date().isoformat()
+        # static pages
+        for rule in app.url_map.iter_rules():
+            if "GET" in rule.methods and len(rule.arguments) == 0:
+                pages.append(
+                    ["https://piersilviodebartolomeis.com" + str(rule.rule), ten_days_ago]
+                )
 
-sched.start()
+        sitemap_xml = render_template('sitemap_template.xml', pages=pages)
+        response = make_response(sitemap_xml)
+        response.headers["Content-Type"] = "application/xml"
+
+        return response
+    except Exception as e:
+        return str(e)
+
+
+scheduler = BackgroundScheduler(daemon=True)
+scheduler.add_job(update_data, 'cron', hour=16, minute=35)  # Updating COVID Data
+scheduler.start()
 
 if __name__ == "__main__":
     app.run(threaded=True)
