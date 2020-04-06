@@ -15,7 +15,8 @@ csp = {
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net',
-        'googletagmanager.com'
+        'googletagmanager.com',
+        'google-analytics.com'
     ],
     'img-src': '\'self\' data:',
     'media-src': [
