@@ -32,3 +32,12 @@
     }
 
 
+    tr.border{
+        background-color: #e9ecef;
+    }
+    th.border{
+        background-color: #e9ecef;
+    }
+    td.result{
+        background-color: #dff0d8
+    }
