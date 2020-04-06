@@ -14,8 +14,7 @@ csp = {
     'script-src': [
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
-        'cdn.jsdelivr.net',
-        'googletagmanager.com'
+        'cdn.jsdelivr.net'
     ],
     'img-src': '\'self\' data:',
     'media-src': [
@@ -26,11 +25,15 @@ csp = {
         '\'unsafe-inline\'',
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
-        'cdn.jsdelivr.net'
+        'cdn.jsdelivr.net',
+        'cdnjs.cloudflare.com',
+        'googletagmanager.com'
     ],
     'style-src-elem':[
         '\'self\'',
-        'use.fontawesome.com']
+        'use.fontawesome.com'],
+    'font-src': '*'
+
 }
 
 app = Flask(__name__)
