@@ -1,4 +1,4 @@
-from flask import Flask, render_template, make_response
+from flask import Flask, render_template
 from second import second
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
@@ -6,6 +6,7 @@ from flask_talisman import Talisman
 from utilities import covid19
 import pickle
 import pandas as pd
+from config import Config
 
 csp = {
     'default-src': [
@@ -49,7 +50,7 @@ csp = {
 
 app = Flask(__name__)
 talisman = Talisman(app, content_security_policy=csp, content_security_policy_nonce_in=['script-src-elem'])
-app.secret_key = "gkDlU9Fap07N_tHeV8iMKQ"
+app.config.from_object(Config)
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
 
