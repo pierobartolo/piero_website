@@ -8,8 +8,6 @@ from flask_talisman import Talisman
 
 csp = {
     'default-src': [
-        '\'self\'',
-        '\'unsafe-inline\'',
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net',
