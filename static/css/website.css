@@ -41,9 +41,7 @@
     td.result{
         background-color: #dff0d8
     }
-    div.table-responsive{
-        height:480px;
-    }
+
     canvas.table{
-        height:480px;
+        height:480px !important;
     }
