@@ -15,8 +15,9 @@ csp = {
         'stackpath.bootstrapcdn.com',
         'code.jquery.com',
         'cdn.jsdelivr.net',
-        'googletagmanager.com',
-        'google-analytics.com'
+        'www.googletagmanager.com',
+        'www.google-analytics.com',
+        'cdnjs.cloudflare.com'
     ],
     'img-src':[ '\'self\' data:',
                 'www.googletagmanager.com'],
@@ -32,7 +33,6 @@ csp = {
         'cdnjs.cloudflare.com',
         'www.googletagmanager.com',
         'www.google-analytics.com',
-        'www.cdnjs.cloudflare.com'
 
     ],
     'style-src-elem':[
@@ -43,7 +43,7 @@ csp = {
 }
 
 app = Flask(__name__)
-talisman = Talisman(app, content_security_policy=csp)
+talisman = Talisman(app)
 app.secret_key = "hardkey"
 app.register_blueprint(second, url_prefix="/bioinformatics")
 
