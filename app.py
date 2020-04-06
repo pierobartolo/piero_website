@@ -22,8 +22,11 @@ csp = {
         'www.google-analytics.com',
         'cdnjs.cloudflare.com'
     ],
-    'img-src':[ '\'self\' data:',
-                'www.googletagmanager.com'],
+    'img-src':[
+        '\'self\' data:',
+        'www.googletagmanager.com',
+        'www.google-analytics.com'
+                ],
     'media-src': [
             '*',
         ],
@@ -38,7 +41,10 @@ csp = {
         'www.google-analytics.com',
 
     ],
-    'style-src': 'use.fontawesome.com',
+    'style-src':[
+        'use.fontawesome.com',
+        '\'self\'',
+        '\'unsafe-inline\''],
     'style-src-elem':[
         '\'self\'',
         'use.fontawesome.com'],
