@@ -37,16 +37,16 @@ def covid():
     with open('new_cases.list', 'rb') as data_list:
         new_cases = pickle.load(data_list)
 
-    if datetime.now().hour >= 16 and datetime.now().minute >= 35:
+    #if datetime.now().hour >= 16 and datetime.now().minute >= 35:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
-    else:
-        times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today()-timedelta(1))]
+    #else:
+     #   times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today()-timedelta(1))]
 
     return render_template('covid.html', total=total_cases, new=new_cases, icu=icu_cases, tests=tests, olabels=times)
 
 
 scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(covid19.update_data, 'cron', hour=23, minute=5)  # Updating COVID Data
+scheduler.add_job(covid19.update_data, 'cron', hour=23, minute=12)  # Updating COVID Data
 scheduler.add_job(covid19.update_data, 'cron', hour=16, minute=35)  # Updating COVID Data
 scheduler.start()
 
