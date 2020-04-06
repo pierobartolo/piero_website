@@ -8,8 +8,7 @@ from flask_talisman import Talisman
 
 csp = {
     'default-src': [
-        '\'self\'',
-        '\'unsafe-inline\''
+        '\'self\''
     ],
     'script-src': [
         'stackpath.bootstrapcdn.com',
@@ -17,7 +16,11 @@ csp = {
         'cdn.jsdelivr.net',
         'use.fontawesome.com',
         'googletagmanager.com'
-    ]
+    ],
+    'img-src': '\'self\' data:',
+    'media-src': [
+            '*',
+        ]
 }
 
 app = Flask(__name__)
