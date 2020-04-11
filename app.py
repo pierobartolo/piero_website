@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, session
-from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 from flask_talisman import Talisman
-from utilities import covid19, bioinformatics
+from utilities import bioinformatics
 import pickle
 import pandas as pd
 from config import Config
@@ -54,9 +53,7 @@ def levenshtein_distance():
         return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
 
 
-scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(covid19.update_data, 'cron', hour=18, minute=6)  # Updating COVID Data
-scheduler.start()
+
 
 if __name__ == "__main__":
     app.run(threaded=True)
