@@ -55,7 +55,7 @@ def edit_distance():
 
 
 scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(covid19.update_data, 'cron', hour=18, minute=06)  # Updating COVID Data
+scheduler.add_job(covid19.update_data, 'cron', hour=18, minute=6)  # Updating COVID Data
 scheduler.start()
 
 if __name__ == "__main__":
