@@ -25,7 +25,7 @@ def projects():
 
 @app.route("/covid-19")
 def covid():
-    with open('covid_data.dict', 'rb') as data_dict:
+    with open('data/covid_data.dict', 'rb') as data_dict:
         covid_data = pickle.load(data_dict)
 
     times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
