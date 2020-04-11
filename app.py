@@ -34,7 +34,7 @@ def covid():
 
 
 @app.route("/levenshtein_distance", methods=['POST', 'GET'])
-def edit_distance():
+def levenshtein_distance():
     if request.method == 'POST':
         if request.form['string1']:
             session['string1'] = request.form['string1']
