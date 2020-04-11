@@ -46,12 +46,12 @@ def edit_distance():
             session['string2'] = ""
 
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
-        return render_template("edit_distance.html", zip=zip, len=len, range=range)
+        return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
     else:
         session['string1'] = "dog"
         session['string2'] = "cat"
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
-        return render_template("edit_distance.html", zip=zip, len=len, range=range)
+        return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
 
 
 scheduler = BackgroundScheduler(daemon=True)
