@@ -12,6 +12,6 @@ def update_data():
     new_cases = campania_data["nuovi_positivi"].values
     covid_data = {"total_cases": total_cases, "icu_cases": icu_cases, "tests": tests, "new_cases": new_cases}
 
-    with open('../data/covid_data.dict', 'wb') as data_dict:
+    with open('data/covid_data.dict', 'wb') as data_dict:
         pickle.dump(covid_data, data_dict)
 
