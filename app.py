@@ -5,6 +5,7 @@ from utilities import bioinformatics
 import pickle
 import pandas as pd
 from config import Config
+import os
 
 
 app = Flask(__name__)
@@ -25,7 +26,7 @@ def projects():
 
 @app.route("/covid-19")
 def covid():
-    with open('data/covid_data.dict', 'rb') as data_dict:
+    with open(os.path.abspath("covid_data.dict"), 'rb') as data_dict:
         covid_data = pickle.load(data_dict)
 
     times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
