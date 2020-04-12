@@ -12,7 +12,6 @@ def update_data():
     tests = campania_data["tamponi"].diff().fillna(10).values
     new_cases = campania_data["nuovi_positivi"].values
     covid_data = {"total_cases": total_cases, "icu_cases": icu_cases, "tests": tests, "new_cases": new_cases}
-
-    with open(os.path.abspath("covid_data.dict"), 'wb') as data_dict:
-        pickle.dump(covid_data, data_dict)
+    with open(os.path.abspath("data/covid_data.dict"), 'wb') as data_dict:
+        pickle.dump(covid_data, data_dict, protocol=pickle.HIGHEST_PROTOCOL)
 
