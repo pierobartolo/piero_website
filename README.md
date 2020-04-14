@@ -1,5 +1,5 @@
 # Source code for my academic website
- * Completely built using Flask .
+ * Completely built using Flask.
  * If you're looking for the rendered version of my website, visit it at https://www.piersilviodebartolomeis.com.
 
 # Usage
