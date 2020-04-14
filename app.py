@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session
 from datetime import datetime
 from flask_talisman import Talisman
-from utilities import bioinformatics
+from utilities import bioinformatics, covid19
 import pickle
 import pandas as pd
 from config import Config
@@ -25,9 +25,7 @@ def projects():
 
 @app.route("/covid-19")
 def covid():
-    with open('data/covid_data.dict', 'rb') as data_dict:
-        covid_data = pickle.load(data_dict)
-
+    covid_data = covid19.update_data()
     times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
     return render_template('covid.html', total=covid_data["total_cases"], new=covid_data["new_cases"], icu=covid_data["icu_cases"], tests=covid_data["tests"], olabels=times)
 
@@ -51,8 +49,6 @@ def levenshtein_distance():
         session['string2'] = "cat"
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
         return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
-
-
 
 
 if __name__ == "__main__":
