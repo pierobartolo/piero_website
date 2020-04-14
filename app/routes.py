@@ -21,7 +21,7 @@ def projects():
 def covid():
     covid_data = covid19.update_data()
 
-    if datetime.now().hour >= 16 and datetime.now().minute >= 35:
+    if datetime.now().hour >= 16 and datetime.now().minute >= 0:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
     else:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today() - timedelta(1))]
