@@ -10,12 +10,20 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container left">
-        <h1 class="display-4">Real time Rt for Campania</h1>
+        <h1 class="display-4">Estimating Campania Covid-19's R_t in Real-Time </h1>
+        <hr class="my-4">
+        <div class="span4">
+        In any epidemic, R_t is the measure known as the effective reproduction number.
+        It's the number of people who become infected per infectious person at time t. The most well-known version of this number is the basic reproduction number: $R_0$ when $t=0$. However, $R_0$ is a single measure that does not adapt with changes in behavior and restrictions.
+
+        As a pandemic evolves, increasing restrictions (or potential releasing of restrictions) change $R_t$. Knowing the current $R_t$ is essential. When $R&gt;1$, the pandemic will spread through the entire population. If R_t, the pandemic will grow to some fixed number less than the population. The lower $R_t$, the more manageable the situation. The value of $R_t$ helps us (1) understand how effective our measures have been controlling an outbreak and (2) gives us vital information about whether we should increase or reduce restrictions based on our competing goals of economic prosperity and human safety. Well-respected epidemiologists argue that tracking $R_t$ is the only way to manage through this crisis.
+        </div>
         <hr class="my-4">
         <div class="table-responsive">
         <canvas id="myChart" height=480  class="table"></canvas>
         </div>
     </div>
+
 
 </div>
         <script nonce="{{ csp_nonce() }}">
@@ -54,35 +62,55 @@ var chartData = {
               {% endfor %}],
       spanGaps: false
   },{
-        label: "BandTop",
-        type: "line",
-        backgroundColor: "rgb(75, 192, 255, 0.5)",
-        borderColor: "transparent",
-        pointRadius: 0,
-        fill: 0,
-        tension: 0,
-        data: [{% for item in high %}
+      label: 'Total Cases',
+      type: 'line',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: "rgba(75,192,192,0.4)",
+      borderColor: "rgba(75,192,192,1)",
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "rgba(75,192,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data : [{% for item in high %}
                 {{item}},
               {% endfor %}],
-        yAxisID: 'y',
-        xAxisID: 'x'
-      },
-      {
-        label: "BandBottom",
-        type: "line",
-        backgroundColor: "rgb(75, 192, 255, 0.5)",
-        borderColor: "transparent",
-        pointRadius: 0,
-        fill: 0,
-        tension: 0,
-        data: [{% for item in low %}
+      spanGaps: false
+  },
+  {
+      label: 'Total Cases',
+      type: 'line',
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: "rgba(75,192,192,0.4)",
+      borderColor: "rgba(75,192,192,1)",
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "rgba(75,192,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data : [{% for item in low %}
                 {{item}},
               {% endfor %}],
-        yAxisID: 'y',
-        xAxisID: 'x'
-      }
-
-
+      spanGaps: false
+  }
   ],
   }
 
