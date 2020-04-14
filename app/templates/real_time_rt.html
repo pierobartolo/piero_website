@@ -25,7 +25,7 @@
         </div>
         <hr class="my-4">
         <div class="table-responsive">
-        <canvas id="myChart" height=480  class="table"></canvas>
+        <canvas id="chart" height=480  class="table"></canvas>
         </div>
     </div>
 
@@ -33,62 +33,77 @@
 </div>
         <script nonce="{{ csp_nonce() }}">
 
-     // Global parameters:
-// do not resize the chart canvas when its container does (keep at 600x400px)
-Chart.defaults.global.responsive = false;
-
-// define the chart data
-var chartData = {
-  labels : [{% for item in olabels %}
+    var ctx = document.getElementById("chart").getContext("2d");
+    var chart = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: [{% for item in olabels %}
              "{{item}}",
             {% endfor %}],
-  datasets : [{
-      label: 'Maximum Likelihood',
-      type: 'line',
-      backgroundColor: "rgb(75, 192, 192, 0.5)",
-      borderColor: "rgb(75, 192, 192)",
-      hoverBorderColor: "rgb(175, 192, 192)",
-      fill: false,
-      tension: 0,
-      data : [{% for item in ml %}
+    datasets: [
+      {
+        label: "Line",
+        type: "line",
+        backgroundColor: "rgb(75, 192, 192, 0.5)",
+        borderColor: "rgb(75, 192, 192)",
+        hoverBorderColor: "rgb(175, 192, 192)",
+        fill: false,
+        tension: 0,
+        data: [{% for item in ml %}
                 {{item}},
-              {% endfor %}]
-  },{
-      label: 'Higher Bound',
-      type: 'line',
-      backgroundColor: "rgb(75, 192, 255, 0.5)",
-      borderColor: "transparent",
-      pointRadius: 0,
-      fill: 0,
-      tension: 0,
-      data : [{% for item in high %}
+              {% endfor %}],
+        yAxisID: 'y',
+        xAxisID: 'x'
+      },
+      {
+        label: "BandTop",
+        type: "line",
+        backgroundColor: "rgb(75, 192, 255, 0.5)",
+        borderColor: "transparent",
+        pointRadius: 0,
+        fill: 0,
+        tension: 0,
+        data: [{% for item in high %}
                 {{item}},
-              {% endfor %}]
+              {% endfor %}],
+        yAxisID: 'y',
+        xAxisID: 'x'
+      },
+      {
+        label: "BandBottom",
+        type: "line",
+        backgroundColor: "rgb(75, 192, 255, 0.5)",
+        borderColor: "transparent",
+        pointRadius: 0,
+        fill: 0,
+        tension: 0,
+        data: [{% for item in low %}
+                {{item}},
+              {% endfor %}],
+        yAxisID: 'y',
+        xAxisID: 'x'
+      }
+
+    ]
   },
-  {
-      label: 'Lower Bound',
-      type: 'line',
-      backgroundColor: "rgb(75, 192, 255, 0.5)",
-      borderColor: "transparent",
-      pointRadius: 0,
-      fill: 0,
-      tension: 0,
-      data : [{% for item in low %}
-                {{item}},
-              {% endfor %}]
+  options: {
+    scales: {
+      xAxes: [{
+        id: 'x',
+        type: 'category'
+      }],
+      yAxes: [{
+        id: 'y',
+        type: 'linear',
+        position: "left",
+        ticks: {
+          stepSize: 1
+        }
+      }]
+    }
   }
-  ],
-  }
-
-
-// get chart canvas
-var ctx = document.getElementById("myChart").getContext("2d");
-
-// create the chart using the chart canvas
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: chartData,
 });
+
 
  </script>
 
