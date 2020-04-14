@@ -35,12 +35,12 @@ def levenshtein_distance():
         session['string1'] = form.string1.data
         session['string2'] = form.string2.data
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
-        return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
+        return render_template("levenshtein_distance.html", zip=zip, len=len, range=range, form=form)
     else:
         session['string1'] = "ACGG"
         session['string2'] = "ACTC"
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
-        return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
+        return render_template("levenshtein_distance.html", zip=zip, len=len, range=range, form=form)
 
 
 
