@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block meta_description%}<meta name="description" content="Real time Rt for Campania">{% endblock %}
-{% block title %}Covid-19 | Real time Rt{% endblock %}
+{% block title %}Covid-19 | Real time R_t{% endblock %}
 {% block navbar_covid%}active{% endblock %}
 {% block head %}
     <script src="static/ChartJs/moment.min.js"></script>
@@ -43,7 +43,7 @@ var chartData = {
              "{{item}}",
             {% endfor %}],
   datasets : [{
-      label: 'Total Cases',
+      label: 'Maximum-Likelihood estimate',
       type: 'line',
       fill: true,
       lineTension: 0.1,
@@ -67,54 +67,28 @@ var chartData = {
               {% endfor %}],
       spanGaps: false
   },{
-      label: 'Total Cases',
+      label: 'Higher Bound',
       type: 'line',
-      fill: true,
-      lineTension: 0.1,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: "rgba(75,192,192,1)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
+      backgroundColor: "rgb(75, 192, 255, 0.5)",
+      borderColor: "transparent",
+      pointRadius: 0,
+      fill: 0,
+      tension: 0,
       data : [{% for item in high %}
                 {{item}},
               {% endfor %}],
-      spanGaps: false
   },
   {
-      label: 'Total Cases',
+      label: 'Lower Bound',
       type: 'line',
-      fill: true,
-      lineTension: 0.1,
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: "rgba(75,192,192,1)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
+      backgroundColor: "rgb(75, 192, 255, 0.5)",
+      borderColor: "transparent",
+      pointRadius: 0,
+      fill: 0,
+      tension: 0,
       data : [{% for item in low %}
                 {{item}},
               {% endfor %}],
-      spanGaps: false
   }
   ],
   }
