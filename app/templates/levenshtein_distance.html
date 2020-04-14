@@ -13,17 +13,17 @@
         <form method="post" action="" class="form-inline" novalidate>
             {{ form.hidden_tag() }}
 
-            {{ form.string1.label }}
+            <label>{{ form.string1.label }}</label>
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                {{form.string1(size=32)}}
+                {{form.string1(size=32, class="input")}}
             </div>
 
-            {{ form.string2.label }}
+            <label>{{ form.string2.label }}</label>
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                 {{form.string2(size=32)}}
+                 {{form.string2(size=32,class="input")}}
             </div>
 
-            {{ form.submit(class="button") }}
+            <button>{{ form.submit(class="button") }}</button>
         </form>
     </div>
 </div>
