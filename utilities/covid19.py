@@ -1,6 +1,4 @@
-import pickle
 import pandas as pd
-import os
 
 
 def update_data():
