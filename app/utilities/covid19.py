@@ -1,4 +1,14 @@
 import pandas as pd
+import numpy as np
+from scipy import stats as sps
+
+# We create an array for every possible value of Rt
+R_T_MAX = 12
+r_t_range = np.linspace(0, R_T_MAX, R_T_MAX*100+1)
+
+# Gamma is 1/serial interval
+# https://wwwnc.cdc.gov/eid/article/26/6/20-0357_article
+GAMMA = 1/4
 
 
 def update_data():
@@ -67,7 +77,7 @@ def get_posteriors(sr, window=7, min_periods=1):
 
 def highest_density_interval(pmf, p=.95):
     # If we pass a DataFrame, just call this recursively on the columns
-    if (isinstance(pmf, pd.DataFrame)):
+    if isinstance(pmf, pd.DataFrame):
         return pd.DataFrame([highest_density_interval(pmf[col]) for col in pmf],
                             index=pmf.columns)
 
