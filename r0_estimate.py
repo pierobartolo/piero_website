@@ -1,12 +1,11 @@
 import pandas as pd
 
-url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
-states = pd.read_csv(url, usecols=[0, 3, 12], index_col=['denominazione_regione', 'data'], parse_dates=['data'],
-                         squeeze=True).sort_index()
-new_cases = states.xs("Campania").rename("Campania cases")
+url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-regioni.json"
+regional_data = pd.read_json(url)
+campania_data = regional_data.loc[regional_data["codice_regione"] == 15]
+total_cases = campania_data["totale_casi"].values
 
-print(new_cases["data"])
-#print([d.strftime('%-d %b') for d in new_cases['data']])
+print([d.strftime('%-d %b') for d in campania_data["data"]])
 
 
 

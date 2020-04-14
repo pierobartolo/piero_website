@@ -20,7 +20,6 @@ def projects():
 @app.route("/covid-19")
 def covid():
     covid_data = covid19.update_data()
-
     if datetime.now().hour >= 16 and datetime.now().minute >= 0:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
     else:
@@ -49,10 +48,6 @@ def real_time_rt():
     hdis = covid19.highest_density_interval(posteriors)
     most_likely = posteriors.idxmax().rename('ML')
     result = pd.concat([most_likely, hdis], axis=1)
-
-    if datetime.now().hour >= 16 and datetime.now().minute >= 0:
-        times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
-    else:
-        times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today() - timedelta(1))]
-
-    return render_template("real_time_rt.html", total=result.values, olabels=times)
+    times = [d.strftime('%-d %b') for d in result.index.get_level_values('data')]
+    print(result["ML"])
+    return render_template("real_time_rt.html", total=result["ML"].values, olabels=times)
