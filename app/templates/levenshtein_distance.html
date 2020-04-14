@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 {% block meta_description%}<meta name="description" content="A  Levenshtein Distance Demo.">{% endblock %}
 {% block title %}Bioinformatics | Levenshtein Distance{% endblock %}
 {% block navbar_bioinfo%}active{% endblock %}
@@ -11,19 +12,7 @@
         <hr class="my-4">
 
         <form method="post" action="" class="form-inline" novalidate>
-            {{ form.hidden_tag() }}
-
-            <label>{{ form.string1.label }}</label>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                {{form.string1(size=32, class="input")}}
-            </div>
-
-            <label>{{ form.string2.label }}</label>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                 {{form.string2(size=32,class="input")}}
-            </div>
-
-            <button>{{ form.submit(class="button") }}</button>
+            {{ wtf.quick_form(form) }}
         </form>
     </div>
 </div>
