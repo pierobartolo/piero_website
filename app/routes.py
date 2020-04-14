@@ -56,4 +56,4 @@ def real_time_rt():
     else:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today() - timedelta(1))]
 
-    return render_template("real_time_rt.html", total=covid_data["total_cases"],olabels = times)
+    return render_template("real_time_rt.html", total=covid_data["total_cases"], olabels=times)
