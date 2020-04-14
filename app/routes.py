@@ -1,4 +1,4 @@
-from flask import render_template, request, session
+from flask import render_template, session
 from datetime import datetime, timedelta
 from app.utilities import bioinformatics, covid19
 from app.forms import TwoStringsForm
@@ -44,9 +44,16 @@ def levenshtein_distance():
 
 @app.route("/real_time_rt")
 def real_time_rt():
+    covid_data = covid19.update_data()
     original, smoothed = covid19.prepare_cases()
     posteriors = covid19.get_posteriors(smoothed)
     hdis = covid19.highest_density_interval(posteriors)
     most_likely = posteriors.idxmax().rename('ML')
     result = pd.concat([most_likely, hdis], axis=1)
-    return render_template("real_time_rt.html", total=result["ML"].values)
+
+    if datetime.now().hour >= 16 and datetime.now().minute >= 0:
+        times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today())]
+    else:
+        times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today() - timedelta(1))]
+
+    return render_template("real_time_rt.html", total=covid_data["total_cases"],olabels = times)
