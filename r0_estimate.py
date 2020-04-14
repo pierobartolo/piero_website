@@ -1,37 +1,12 @@
 import pandas as pd
-import numpy as np
-from datetime import datetime,timedelta
-from matplotlib import pyplot as plt
-from matplotlib.dates import date2num, num2date
-from matplotlib import dates as mdates
-from matplotlib import ticker
-from matplotlib.colors import ListedColormap
-from matplotlib.patches import Patch
 
-from scipy import stats as sps
-from scipy.interpolate import interp1d
+url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv"
+states = pd.read_csv(url, usecols=[0, 3, 12], index_col=['denominazione_regione', 'data'], parse_dates=['data'],
+                         squeeze=True).sort_index()
+new_cases = states.xs("Campania").rename("Campania cases")
 
-from IPython.display import clear_output
-from app.utilities import covid19
-
-
-def prepare_cases():
-
-    smoothed = new_cases.rolling(7,
-                                 win_type='gaussian',
-                                 min_periods=1,
-                                 center=True).mean(std=2).round()
-
-    zeros = smoothed.index[smoothed.eq(0)]
-    if len(zeros) == 0:
-        idx_start = 0
-    else:
-        last_zero = zeros.max()
-        idx_start = smoothed.index.get_loc(last_zero) + 1
-    smoothed = smoothed.iloc[idx_start:]
-    original = new_cases.loc[smoothed.index]
-
-    return original, smoothed
+print(new_cases["data"])
+#print([d.strftime('%-d %b') for d in new_cases['data']])
 
 
 
@@ -41,13 +16,6 @@ def prepare_cases():
 
 
 
-
-# Note that this takes a while to execute - it's not the most efficient algorithm
-
-most_likely = posteriors.idxmax().rename('ML')
-
-# Look into why you shift -1
-result = pd.concat([most_likely, hdis], axis=1)
 
 
 def plot_rt(result, ax, state_name):
@@ -118,13 +86,5 @@ def plot_rt(result, ax, state_name):
     fig.set_facecolor('w')
 
 
-fig, ax = plt.subplots(figsize=(600 / 72, 400 / 72))
 
-plot_rt(result, ax, "Campania")
-ax.set_title(f'Real-time $R_t$ for Campania')
-ax.set_ylim(.5, 3.5)
-ax.xaxis.set_major_locator(mdates.WeekdayLocator())
-ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
-
-plt.show()
 

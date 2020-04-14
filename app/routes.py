@@ -44,7 +44,6 @@ def levenshtein_distance():
 
 @app.route("/real_time_rt")
 def real_time_rt():
-    covid_data = covid19.update_data()
     original, smoothed = covid19.prepare_cases()
     posteriors = covid19.get_posteriors(smoothed)
     hdis = covid19.highest_density_interval(posteriors)
@@ -56,4 +55,4 @@ def real_time_rt():
     else:
         times = [d.strftime('%-d %b') for d in pd.date_range('24/02/2020', datetime.now().today() - timedelta(1))]
 
-    return render_template("real_time_rt.html", total=covid_data["total_cases"], olabels=times)
+    return render_template("real_time_rt.html", total=result.values, olabels=times)
