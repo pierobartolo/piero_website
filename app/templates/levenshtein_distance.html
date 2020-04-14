@@ -12,8 +12,11 @@
         <hr class="my-4">
 
         <form method="post" action="" class="form-inline" novalidate>
-            {{ wtf.quick_form(form) }}
-            {{ wtf.form_field(form.submit,class="btn btn-dark") }}
+             {{ wtf.form_field(form.string1, class='form-control',placeholder='A string') }}
+
+             {{ wtf.form_field(form.string2, class='form-control',placeholder='Another string') }}
+
+             {{ wtf.form_field(form.submit,class="btn btn-dark") }}
         </form>
     </div>
 </div>
