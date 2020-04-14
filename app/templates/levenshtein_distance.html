@@ -12,7 +12,18 @@
         <hr class="my-4">
 
         <form method="post" action="" class="form-inline" novalidate>
-            {{ wtf.quick_form(form) }}
+            {{ form.hidden_tag() }}
+            {{ wtf.form_errors(form, hiddens="only") }}
+
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                {{wtf.form_field(form.string1)}}
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                 {{wtf.form_field(form.string2)}}
+            </div>
+
+            {{ wtf.form_field(form.submit) }}
         </form>
     </div>
 </div>
