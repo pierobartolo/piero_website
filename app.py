@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, session
 from datetime import datetime
 from flask_talisman import Talisman
 from utilities import bioinformatics, covid19
-import pickle
 import pandas as pd
 from config import Config
 
