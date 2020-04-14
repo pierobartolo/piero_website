@@ -1,5 +1,8 @@
+import os
+
+
 class Config(object):
-    SECRET_KEY = "you-will-never-guess"
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     csp = {
         'default-src': [
             '\'self\'',
