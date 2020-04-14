@@ -49,4 +49,4 @@ def real_time_rt():
     most_likely = posteriors.idxmax().rename('ML')
     result = pd.concat([most_likely, hdis], axis=1)
     times = [d.strftime('%-d %b') for d in result.index.get_level_values('data')]
-    return render_template("real_time_rt.html", ml=result["ML"].values,high=result["High"].values,low=result["Low"].values, olabels=times)
+    return render_template("real_time_rt.html",result=result)
