@@ -10,19 +10,20 @@
         <p class="lead">The Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits (i.e. insertions, deletions, or substitutions) required to change one word into the other. </p>
         <hr class="my-4">
 
-        <form method="post" action="#" class="form-inline">
+        <form method="post" action="" class="form-inline" novalidate>
+            {{ form.hidden_tag() }}
 
-            <label class="sr-only" >string1<</label>
+            {{ form.string1.label }}
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                <input type="text" class="form-control" name="string1" placeholder="A string">
+                {{form.string1(size=32)}}
             </div>
 
-            <label class="sr-only">string2</label>
+            {{ form.string2.label }}
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-              <input type="text" class="form-control" name="string2" placeholder="Another string">
+                 {{form.string2(size=32)}}
             </div>
 
-            <button type="submit" class="btn btn-dark">Go</button>
+            {{ form.submit() }}
         </form>
     </div>
 </div>

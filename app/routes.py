@@ -1,6 +1,7 @@
 from flask import render_template, request, session
 from datetime import datetime, timedelta
 from app.utilities import bioinformatics, covid19
+from app.forms import TwoStringsForm
 import pandas as pd
 from app import app
 
@@ -29,21 +30,15 @@ def covid():
 
 @app.route("/levenshtein_distance", methods=['POST', 'GET'])
 def levenshtein_distance():
-    if request.method == 'POST':
-        if request.form['string1']:
-            session['string1'] = request.form['string1']
-        else:
-            session['string1'] = ""
-        if request.form['string2']:
-            session['string2'] = request.form['string2']
-        else:
-            session['string2'] = ""
-
+    form = TwoStringsForm()
+    if form.validate_on_submit():
+        session['string1'] = form.string1.data
+        session['string2'] = form.string2.data
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
         return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
     else:
-        session['string1'] = "dog"
-        session['string2'] = "cat"
+        session['string1'] = "ACGG"
+        session['string2'] = "ACTC"
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
         return render_template("levenshtein_distance.html", zip=zip, len=len, range=range)
 
