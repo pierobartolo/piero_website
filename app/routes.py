@@ -1,5 +1,5 @@
 from flask import render_template, request, session
-from datetime import datetime
+from datetime import datetime, timedelta
 from app.utilities import bioinformatics, covid19
 import pandas as pd
 from app import app
