@@ -13,7 +13,7 @@
 
         <form method="post" action="" class="form-inline" novalidate>
             {{ wtf.quick_form(form) }}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            {{ wtf.form_field(form.submit,class="btn btn-dark") }}
         </form>
     </div>
 </div>
