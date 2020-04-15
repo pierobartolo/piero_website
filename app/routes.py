@@ -41,12 +41,3 @@ def levenshtein_distance():
         session['edit_dist_matrix'] = bioinformatics.calculate_edit_distance(session['string1'], session['string2'])
         return render_template("levenshtein_distance.html", zip=zip, len=len, range=range, form=form)
 
-@app.route("/real_time_rt")
-def real_time_rt():
-    original, smoothed = covid19.prepare_cases()
-    posteriors = covid19.get_posteriors(smoothed)
-    hdis = covid19.highest_density_interval(posteriors)
-    most_likely = posteriors.idxmax().rename('ML')
-    result = pd.concat([most_likely, hdis], axis=1)
-    times = [d.strftime('%-d %b') for d in result.index.get_level_values('data')]
-    return render_template("real_time_rt.html",result=result.to_json(orient='values'))
